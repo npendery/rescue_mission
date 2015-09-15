@@ -1,0 +1,17 @@
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @question.description %>
+</p>
+
+<p>
+  <%= render template: 'answers/index' %>
+</p>
+
+<%= link_to 'New answer', new_question_answer_path(@question) %>
+
+<%= link_to 'Back', questions_path %>

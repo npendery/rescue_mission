@@ -1,0 +1,24 @@
+<h4>Answers</h4>
+
+<% if @question.answers.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Answer Description</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @question.answers.order(created_at: :desc).each do |answer| %>
+        <tr>
+          <td><%= answer.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p> No answers yet </p>
+<% end %>
+
+<br>
