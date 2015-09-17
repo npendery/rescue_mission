@@ -13,5 +13,12 @@
 </p>
 
 <%= link_to 'New answer', new_question_answer_path(@question) %>
-
-<%= link_to 'Back', questions_path %>
+<br>
+<br>
+<% if session[:user_id] == @question.user_id %>
+  <%= render partial: 'layouts/usermatch' %>
+<% end %>
+<%= link_to 'Back to questions', questions_path %>
+<br>
+<br>
+<%= render partial: "layouts/signout" %>

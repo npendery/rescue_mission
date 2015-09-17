@@ -11,8 +11,10 @@ feature 'visitor posts a question', %Q{
   # - I must provide a description that is at least 150 characters long
   # - I must be presented with errors if I fill out the form incorrectly
 
-  scenario 'post question with not enough title text' do
+  scenario 'post question successfully' do
+    user = User.create!(provider: "github", uid: '12345', name:'Joe')
     visit '/'
+    sign_in_as(user)
 
     click_link("New Question")
 
@@ -41,7 +43,9 @@ feature 'visitor posts a question', %Q{
   end
 
   scenario 'post question with not enough description text' do
+    user = User.create!(provider: "github", uid: '12345', name:'Joe')
     visit '/'
+    sign_in_as(user)
 
     click_link("New Question")
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'visitor posts a question', %Q{
+feature 'visitor answers a question', %Q{
   As a user
   I want to answer another user's question
   So that I can help them solve their problem

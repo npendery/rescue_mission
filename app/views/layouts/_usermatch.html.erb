@@ -1,9 +1,6 @@
-<h1>Edit Question</h1>
-
-<%= render 'form' %>
+<%= link_to 'Edit Question', edit_question_path(@question) %>
 <br>
 <br>
 <%= link_to 'Delete Question', question_path(@question), method: :delete %>
 <br>
 <br>
-<%= link_to 'Back', question_path %>

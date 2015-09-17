@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  root 'questions#index'
+  root to: "questions#index"
 
-  resources :questions, only: [:index, :show, :new, :create] do
-    resources :answers, only: [:index, :show, :new, :create]
+  get "/auth/:provider/callback" => "sessions#create"
+
+  get "/signout" => "sessions#destroy", :as => :signout
+
+  resources :questions do
+    resources :answers
   end
+
+  resources :answers
+
+  resources :sessions
 end

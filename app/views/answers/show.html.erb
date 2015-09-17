@@ -2,3 +2,8 @@
   <strong>Description:</strong>
   <%= @answer.description %>
 </p>
+<br>
+<br>
+<% if session[:user_id] == @answer.user_id %>
+  <%= render partial: 'layouts/ans_user_match' %>
+<% end %>

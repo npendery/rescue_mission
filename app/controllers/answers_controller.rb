@@ -10,6 +10,7 @@ class AnswersController < ApplicationController
   # GET /Answers/1
   # GET /Answers/1.json
   def show
+    @answer = Answer.find(params[:id])
   end
 
   # GET /Answers/new
@@ -25,17 +26,15 @@ class AnswersController < ApplicationController
   # POST /Answers
   # POST /Answers.json
   def create
-
     @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)
     @answer.question = @question
+    @answer.user_id = session[:user_id]
 
     if @answer.save
-
       flash[:notice] = "Answer Saved"
       redirect_to question_path(@question)
     else
-
       flash[:alert] = "Answer not saved"
       render :new
     end
@@ -44,15 +43,14 @@ class AnswersController < ApplicationController
   # PATCH/PUT /Answers/1
   # PATCH/PUT /Answers/1.json
   def update
-    respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @answer }
-      else
-        format.html { render :edit }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
+
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+
+    @answer.update(answer_params)
+
+    flash[:notice] = "Answer Updated"
+    redirect_to question_path(@question)
   end
 
   # DELETE /Answers/1
@@ -73,6 +71,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:description)
+      params.require(:answer).permit(:description, :best_answer)
     end
 end
